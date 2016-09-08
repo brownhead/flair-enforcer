@@ -1,6 +1,6 @@
 import datetime
 import logging
-import sys
+import os
 import time
 
 import praw
@@ -30,6 +30,6 @@ def main(username, password, subreddit_name):
 
 
 if __name__ == "__main__":
-    main(username=sys.environ["FLAIR_ENFORCER_USERNAME"],
-         password=sys.environ["FLAIR_ENFORCER_PASSWORD"],
-         subreddit_name=sys.environ["FLAIR_ENFORCER_SUBREDDIT_NAME"])
+    main(username=os.environ["FLAIR_ENFORCER_USERNAME"],
+         password=os.environ["FLAIR_ENFORCER_PASSWORD"],
+         subreddit_name=os.environ["FLAIR_ENFORCER_SUBREDDIT_NAME"])
