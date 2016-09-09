@@ -25,3 +25,9 @@ export FLAIR_ENFORCER_SUBREDDIT_NAME=yoursubreddit
 # Run!
 python main.py
 ```
+
+## Limitations
+
+This'll only work for subreddits with pretty low volume. If your subreddit receives posts faster than 25 every 10 minutes, this bot will start choking. It'd be trivial to make it work for slightly higher loads (like up to 100 every 10 minutes) but any higher and a more drastic change to how the bot functions would need to be made.
+
+This is a script born out of need, and isn't really meant to be reused by other people. But you're welcome to try to anyways.
