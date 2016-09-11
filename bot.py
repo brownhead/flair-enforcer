@@ -1,7 +1,7 @@
 import datetime
+import json
 import logging
 import math
-
 
 class FlairEnforcer(object):
     TIME_TO_INITIAL_WARNING = datetime.timedelta(minutes=3)
@@ -43,6 +43,22 @@ class FlairEnforcer(object):
     def get_unflaired_content(self):
         return (submission for submission in self.subreddit.get_new(limit=25)
                 if not self.has_flair(submission))
+
+    def as_json(self):
+        return json.dumps({
+            "version": 1,
+            "warned_submission_ids": list(self._warned_submission_ids),
+        })
+
+    @classmethod
+    def from_json(cls, session, subreddit_name, json):
+        if json["version"] != 1:
+            raise ValueError("Mismatched version %r in JSON, expected 1" % (
+                                 json["version"], ))
+
+        enforcer = cls(session, subreddit_name)
+        enforcer._warned_submission_ids.update(json["warned_submission_ids"])
+        return enforcer
 
     def run_once(self, utcnow):
         # Keep track of all of the unflaired posts we see so we can clean up
