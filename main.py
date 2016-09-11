@@ -2,6 +2,7 @@ import datetime
 import json
 import logging
 import os
+import signal
 import time
 
 import atomicfile
@@ -31,8 +32,15 @@ def main(username, password, subreddit_name, recovery_file):
                      recovery_file, exc_info=True)
         enforcer = bot.FlairEnforcer(session, subreddit_name)
 
+    # Start handling the hangup signal
+    def handle_hangup(signum, frame):
+        logging.info("Hangup signal captured.")
+        handle_hangup.hangup_captured = True
+
+    signal.signal(signal.SIGHUP, handle_hangup)
+
     # Start enforcing!
-    while True:
+    while not getattr(handle_hangup, "hangup_captured", False):
         try:
             enforcer.run_once(datetime.datetime.utcnow())
         except Exception:
