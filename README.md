@@ -21,6 +21,7 @@ export PYTHONPATH="$(pwd)"
 export FLAIR_ENFORCER_USERNAME=yourusername
 export FLAIR_ENFORCER_PASSWORD=yourpassword
 export FLAIR_ENFORCER_SUBREDDIT_NAME=yoursubreddit
+export FLAIR_ENFORCER_RECOVERY_FILE=somefilesomewhere.json
 
 # Run!
 python main.py
