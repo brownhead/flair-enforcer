@@ -12,7 +12,7 @@ cd flair-enforcer
 # Then install dependencies
 virtualenv env
 source env/bin/activate
-pip install praw
+pip install -r ./requirements.txt
 
 # Let's us import properly without having to work for it
 export PYTHONPATH="$(pwd)"
